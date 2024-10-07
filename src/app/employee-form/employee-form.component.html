@@ -1,5 +1,9 @@
 <h2>Create Employee</h2>
 
+<div *ngIf="errorMesage != ''">
+    {{errorMesage}}
+</div>
+
 <form (ngSubmit)="onSubmit()">
     <div>
         <label>First Name</label>

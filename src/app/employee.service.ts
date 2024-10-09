@@ -12,6 +12,10 @@ export class EmployeeService {
   private apiUrl = `${environment.apiUrl}/employee`
   constructor(private http: HttpClient) { }
 
+  getEmployeById(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+  }
+
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.apiUrl);
   }
@@ -20,9 +24,11 @@ export class EmployeeService {
     return this.http.post<Employee>(this.apiUrl, employee);
   }
 
-  deleteEmployee(id: number): Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+  editEmployee(employee: Employee): Observable<Employee>{
+    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
   }
-  
 
+  deleteEmployee(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
